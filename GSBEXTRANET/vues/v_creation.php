@@ -35,6 +35,8 @@
 							    <input name="mdp" class="form-control" type="password" placeholder="password"/>
                                                             <input name="prénom" class="form-control" type="text" placeholder="prénom"/>
                                                             <input name="nom" class="form-control" type="text" placeholder="nom"/>
+                                                            <input name="DateNaissance" class="form-control" type="text" required
+                                                                   minlength="4" maxlength="4" size="10" placeholder="Annee de naissance"/>
 								<br>
                                                                 <input type="checkbox" id="boxPolitique" name="boxPolitique" value="true">
                                                             <label for="boxPolitique">J'atteste avoir lu et accepte notre politique de protection des données</label>

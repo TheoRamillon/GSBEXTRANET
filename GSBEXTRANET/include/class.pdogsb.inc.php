@@ -62,7 +62,7 @@ function checkUser($login,$pwd):bool {
     //AJOUTER TEST SUR TOKEN POUR ACTIVATION DU COMPTE
     $user=false;
     $pdo = PdoGsb::$monPdo;
-    $login = $this->hashMail($login);
+    //$login = $this->hashMail($login);
     //var_dump($login);
     $monObjPdoStatement=$pdo->prepare("SELECT motDePasse FROM medecin WHERE mail= :login AND token IS NULL");
     $bvc1=$monObjPdoStatement->bindValue(':login',$login,PDO::PARAM_STR);
@@ -116,21 +116,22 @@ $leResultat = $pdoStatement->fetch();
 }
 
 
-public function creeMedecin($email, $mdp, $nom, $prenom)
+public function creeMedecin($email, $mdp, $nom, $prenom, $dateNaissance)
 {
     $lePdo = PdoGsb::getPdoGsb();
     $mdpHash = password_hash($mdp, PASSWORD_DEFAULT);
     $email = $this->hashMail($email);
-    $pdoStatement = PdoGsb::$monPdo->prepare("INSERT INTO medecin(id, nom, prenom ,mail, motDePasse,dateCreation,dateConsentement, numGrade) "
-            . "VALUES (null, :leNom, :lePrenom, :leMail, :leMdp, now(),now(), 2)");
+    $pdoStatement = PdoGsb::$monPdo->prepare("INSERT INTO medecin(id, nom, prenom ,mail, dateNaissance, motDePasse,dateCreation,dateConsentement, numGrade) "
+            . "VALUES (null, :leNom, :lePrenom, :leMail, :dateNaissance, :leMdp, now(),now(), 2)");
     $bv1 = $pdoStatement->bindValue(':leMail', $email);
     $bv2 = $pdoStatement->bindValue(':leMdp', $mdpHash);
     $bv3 = $pdoStatement->bindValue(':leNom', $nom, PDO::PARAM_STR);
     $bv4 = $pdoStatement->bindValue(':lePrenom', $prenom, PDO::PARAM_STR);
-    //var_dump($lePdo->testMail($email));
+    $bv4 = $pdoStatement->bindValue(':dateNaissance', $dateNaissance);
+    var_dump($lePdo->testMail($email));
+    var_dump($email);
     if($lePdo->testMail($email) === false){
         $execution = $pdoStatement->execute();
-        //var_dump($execution);
         return $execution;
     }
     else
@@ -141,11 +142,12 @@ public function creeMedecin($email, $mdp, $nom, $prenom)
 
 function testMail($email){
     $pdo = PdoGsb::$monPdo;
-    $email = $this->hashMail($email);
+    //$email = $this->hashMail($email);
     $pdoStatement = $pdo->prepare("SELECT count(*) as nbMail FROM medecin WHERE mail = :leMail");
     $bv1 = $pdoStatement->bindValue(':leMail', $email);
     $execution = $pdoStatement->execute();
     $resultatRequete = $pdoStatement->fetch();
+    //var_dump($resultatRequete);
     if ($resultatRequete['nbMail']==0)
         $mailTrouve = false;
     else

@@ -22,7 +22,11 @@ switch($action){
                 $lePassword = htmlspecialchars($_POST['mdp']);
                 $leNom = htmlspecialchars($_POST['nom']);
                 $lePrenom = htmlspecialchars($_POST['prénom']);
-                $checkBoxxx = $_POST['boxPolitique'];
+                $laDateDeNaissance = htmlspecialchars($_POST['DateNaissance']);
+                if(isset($_POST['boxPolitique']))
+                    $checkBoxxx = $_POST['boxPolitique'];
+                else
+                    $checkBoxxx = 'false';
         
         
         if ($leLogin == $_POST['login'])
@@ -91,7 +95,7 @@ switch($action){
             
             if($checkBoxxx==='true'){
                 echo 'tout est ok, nous allons pouvoir créer votre compte...<br/>';
-                $executionOK = $pdo->creeMedecin($leLogin, $lePassword, $leNom, $lePrenom);       
+                $executionOK = $pdo->creeMedecin($leLogin, $lePassword, $leNom, $lePrenom, $laDateDeNaissance);       
                
                 if ($executionOK==true){
                     echo "c'est bon, votre compte a bien été créé ;-)";
