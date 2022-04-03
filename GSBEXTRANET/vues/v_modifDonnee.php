@@ -20,12 +20,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-<!--     <form method="post" action="index.php?uc=modifDonnee&action=ValidationModification">
+  </head>
+    <body background="assets/img/laboratoire.jpg">
+        <form method="post" action="index.php?uc=modifDonnee&action=ValidationModification">
             <label>Nom :</label>
-            <input name="nom" type="text" value="">
+            <input name="nom" type="text" value="<?php echo $medecin['nom'];?>">
             <br>
             <label>Prenom :</label>
-            <input type="texte" name="prenom" value="">
+            <input type="texte" name="prenom" value="<?php echo $medecin['prenom']; ?>">
             <br>
             <input name="check" type="checkbox" value="value1">
             <label> Changer de mot de passe : </label>
@@ -33,49 +35,10 @@
             <input type="submit" name="btnValidation" value="Valider">
                 
                 
-            </form>-->
-  </head>
-             <body background="assets/img/laboratoire.jpg">
-                   <div class="page-content container">
-	              <div class="row">
-		            <div class="col-md-4 col-md-offset-4">
-			          <div class="login-wrapper">
-				        <div class="box">
-					   <div class="content-wrap">
-						<legend>Modfication des données </legend>
-							<form method="post" action="index.php?uc=modifDonnee&action=ValidationModification">
-                                                            <input name="nom" class="form-control" type="text"  value="<?php echo $medecin['nom']; ?>">
-								<input name="prenom" class="form-control" type="text" value="<?php echo $medecin['prenom']; ?>">
-								</br>
-                                                                <label><u> Changer de mot de passe : </u></label>
-                                                                <br>
-                                                                <input name="check" type="checkbox" value="value1">
-                                                                <br>
-                                                                <?php
-                                                                var_dump($_POST['check']);
-                                                                    if(isset($_POST['check'])){
-                                                                        if($_POST['check'] === true){
-                                                                            echo '<input name="mdp1" class="form-control" type="password" placeholder="Nouveau mot de passe">
-                                                                                    <input name="mdp2" class="form-control" type="password" placeholder="Confirmation mot de passe">
-                                                                                    </br>
-                                                                                    <input type="submit" class="btn btn-primary signup" value="Valider">';
-                                                                        }
-                                                                    }
-                                                                ?>
-                                                                <br>
-                                                               <input type="submit" name="btnValidation" value="Valider">
-                                                        </form>
-                                                <br>
-                                                
-                                             </div>	
-                                     
-                                    
-				        </div>
-			            </div>
-		            </div>
-	                </div>
-                    </div>
+            </form>
             
-            </body>
+            
+        </form>
+    </body>
 </html>
 
